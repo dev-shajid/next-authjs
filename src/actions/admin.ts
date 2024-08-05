@@ -1,13 +1,13 @@
 'use server'
 
-import { getCurrentRole } from "@/lib/authUser.server"
+import { CurrentRole } from "@/lib/authUser.server"
 import { UserRole } from "@prisma/client"
 
 export const admin = async () => {
-    const role = await getCurrentRole()
+    const role = await CurrentRole()
 
     if (role === UserRole.ADMIN) {
-        return { message: "Allowed API rote", status: 200, ok:true }
+        return { message: "Allowed API rote", status: 200, ok: true }
     }
-    return { message: "Forbidden API route", status: 403, ok:false }
+    return { message: "Forbidden API route", status: 403, ok: false }
 }

@@ -1,7 +1,7 @@
 'use server'
 
 import ApiError from "@/lib/ApiError"
-import { getCurrentUser } from "@/lib/authUser.server"
+import { CurrentUser } from "@/lib/authUser.server"
 import { db } from "@/lib/db"
 import { ProfileSchema } from "@/schema/profile.schema"
 import { z } from "zod"
@@ -16,7 +16,7 @@ export const profile = AsyncHandler(async (values: z.infer<typeof ProfileSchema>
 
     if (!validateFields.success) return ApiError(400, "Invalid Credentials", validateFields.error.errors)
 
-    const user = await getCurrentUser()
+    const user = await CurrentUser()
     if (!user) return ApiError(403, "Unauthorized")
 
     const { data: dbUser, success } = await getUserById(user.id)

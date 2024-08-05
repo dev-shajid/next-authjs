@@ -13,6 +13,7 @@ export default function UpdateUser() {
     const router = useRouter()
 
     const user: any = data?.user
+
     async function updateUsername(id: string) {
         if (!user) return
         const userData = await getUserById(id)
@@ -39,7 +40,7 @@ export default function UpdateUser() {
                 })
                 .finally(() => setHasCalledUpdate(true))
         }
-    }, [status, user?.id])
+    }, [status, user?.id, hasCalledUpdate])
 
     return null
 }

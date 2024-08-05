@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ApiErrorType } from '@/lib/ApiError'
 import { ApiResponseType } from '@/lib/ApiResponse'
-import { getCurrentUser } from '@/lib/authUser.client'
+import { CurrentUser } from '@/lib/authUser.client'
 import { ProfileSchema } from '@/schema/profile.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserRole } from '@prisma/client'
@@ -21,7 +21,7 @@ import { VscLoading } from 'react-icons/vsc'
 import { z } from 'zod'
 
 export default function ProfilePage() {
-  const { user, status } = getCurrentUser()
+  const { user, status } = CurrentUser()
   const { update } = useSession()
   const router = useRouter()
 
@@ -43,10 +43,10 @@ export default function ProfilePage() {
     Object.keys(values).forEach((key) => {
       if ((user as { [key: string]: any })[key] != (values as { [key: string]: string | UserRole })[key]) {
         setNewData(_ => ({ ..._, [key]: (values as { [key: string]: any })[key] }))
-      }else{
-      
-        setNewData(pre=>{
-          const newItems = {...pre}
+      } else {
+
+        setNewData(pre => {
+          const newItems = { ...pre }
           delete newItems[key]
           return newItems
         })
@@ -76,7 +76,7 @@ export default function ProfilePage() {
         role: user?.role || undefined
       })
     }
-  }, [user])
+  }, [status])
 
   return (
     <Card className='w-full'>

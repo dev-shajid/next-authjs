@@ -20,8 +20,9 @@ import { LinkButton } from '../ui/linkButton'
 interface FormLoginProps {
   isVerified: boolean;
   OAuthAccountNotLinked: boolean;
+  callback?:string | null;
 }
-export default function LoginForm({ isVerified, OAuthAccountNotLinked }: FormLoginProps) {
+export default function LoginForm({ isVerified, OAuthAccountNotLinked, callback }: FormLoginProps) {
   const [isPending, setTransition] = useTransition()
   const [data, setData] = useState<ApiErrorType | ApiResponseType | undefined>(undefined)
 
@@ -35,7 +36,7 @@ export default function LoginForm({ isVerified, OAuthAccountNotLinked }: FormLog
 
   const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
     setTransition(async () => {
-      const res = await loginUser(values)
+      const res = await loginUser(values, callback)
       if (res) setData(res)
       console.log(res)
     })

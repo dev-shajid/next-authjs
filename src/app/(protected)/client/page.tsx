@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { UserInfo, UserInfoFallback } from '@/components/UserDetails'
-import { getCurrentUser } from '@/lib/authUser.client'
+import { CurrentUser } from '@/lib/authUser.client'
 import { SessionProvider } from 'next-auth/react'
 
 export default function ClientUserPage() {
@@ -22,9 +22,9 @@ export default function ClientUserPage() {
 }
 
 function ClientUser() {
-  const {user, status} = getCurrentUser()
+  const { user, status } = CurrentUser()
 
-  if(status=='loading') return <UserInfoFallback />
+  if (status == 'loading') return <UserInfoFallback />
 
   return <UserInfo user={user} />
 

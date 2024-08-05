@@ -66,7 +66,7 @@ export const reginsterUser = AsyncHandler(async (values: z.infer<typeof Register
 })
 
 
-export const loginUser = async (values: z.infer<typeof LoginSchema>) => {
+export const loginUser = async (values: z.infer<typeof LoginSchema>, callback?:string | null) => {
     try {
         const validateFields = LoginSchema.safeParse(values)
 
@@ -105,7 +105,7 @@ export const loginUser = async (values: z.infer<typeof LoginSchema>) => {
             email: values.email,
             password: values.password,
             redirect: true,
-            redirectTo: DEFAUTL_AUTH_REDIRECT,
+            redirectTo: callback || DEFAUTL_AUTH_REDIRECT,
         })
 
         return ApiResponse(200, "Login success")

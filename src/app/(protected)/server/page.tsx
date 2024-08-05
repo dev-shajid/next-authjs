@@ -1,7 +1,7 @@
 import { auth } from '@/auth'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { UserInfo, UserInfoFallback } from '@/components/UserDetails'
-import { getCurrentUser } from '@/lib/authUser.server'
+import { CurrentUser } from '@/lib/authUser.server'
 import React, { Suspense } from 'react'
 
 export default async function ServerUserPage() {
@@ -12,7 +12,7 @@ export default async function ServerUserPage() {
         <CardTitle className='text-center'>💻 Server Component</CardTitle>
       </CardHeader>
       <CardContent>
-        <Suspense fallback={<UserInfoFallback/>}>
+        <Suspense fallback={<UserInfoFallback />}>
           <ServerUser />
         </Suspense>
       </CardContent>
@@ -20,10 +20,10 @@ export default async function ServerUserPage() {
   )
 }
 
-async function ServerUser(){
+async function ServerUser() {
   await new Promise(resolve => setTimeout(resolve, 1500))
-  const user = await getCurrentUser()
+  const user = await CurrentUser()
 
-  return <UserInfo user={user} /> 
+  return <UserInfo user={user} />
 
 }

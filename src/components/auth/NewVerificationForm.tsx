@@ -24,9 +24,8 @@ export default function NewVerificationForm({ token }: { token?: string }) {
     }, [token])
 
     useEffect(() => {
-        console.log({token})
         onSubmit()
-    }, [])
+    }, [token])
 
     if (!token) notFound()
 

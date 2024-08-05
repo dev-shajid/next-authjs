@@ -14,14 +14,10 @@ export default async function Home() {
       <div className="space-y-6">
         <h1 className="text-6xl text-white drop-shadow-md">🔐 Auth</h1>
         <p className="text-white text-lg">A simple authentication service</p>
-
-        {JSON.stringify(session, null, 2)}
-
-
         {
           session?.user ? (
             <div className="flex gap-4 items-center justify-center">
-              <LinkButton href="/profile">Profile</LinkButton>
+              <LinkButton href="/server">Server</LinkButton>
               <SignOut />
             </div>
           ) : (

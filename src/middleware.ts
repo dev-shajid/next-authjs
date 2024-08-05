@@ -21,7 +21,10 @@ export default auth((req) => {
         }
 
         if (!isLoggedIn && !isPublicRoute) {
-            return Response.redirect(new URL(DEFAUTL_UNAUTH_REDIRECT, req.nextUrl))
+            let callback = req.nextUrl.pathname
+            if(req.nextUrl.search) callback += req.nextUrl.search
+            const encodedCallback = encodeURIComponent(callback)
+            return Response.redirect(new URL(`${DEFAUTL_UNAUTH_REDIRECT}?callback=${encodedCallback}`, req.nextUrl))
         }
 
     } catch (error) {

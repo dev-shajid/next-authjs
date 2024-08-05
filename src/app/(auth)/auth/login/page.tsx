@@ -4,7 +4,7 @@ import React from 'react'
 export default function LoginPage({
   searchParams,
 }: {
-  searchParams: { verified: string; error: string };
+  searchParams: { verified: string; error: string, callback?:string | null };
 }) {
   const isVerified = searchParams.verified === "true";
   const OAuthAccountNotLinked = searchParams.error === "OAuthAccountNotLinked";
@@ -12,6 +12,7 @@ export default function LoginPage({
     <LoginForm
       isVerified={isVerified}
       OAuthAccountNotLinked={OAuthAccountNotLinked}
+      callback={searchParams.callback}
     />
   )
 }
